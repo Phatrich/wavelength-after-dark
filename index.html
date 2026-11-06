@@ -1,74 +1,333 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#171923"><meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="After Dark">
-<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#171923">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="After Dark">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>Wavelength: After Dark</title>
 <style>
-:root{color-scheme:dark;--bg:#171923;--panel:#222635;--muted:#aeb4c4;--line:#383e50}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f7f7fb;font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
-header{padding:calc(18px + env(safe-area-inset-top)) 18px 14px;text-align:center}h1{font-size:25px;letter-spacing:2px;margin:0;font-weight:850}header p{color:var(--muted);font-size:11px;letter-spacing:2px;margin:7px 0 0}
-main{max-width:720px;margin:auto;padding:0 16px 40px}.tabs{display:flex;gap:8px;margin:8px 0 18px}
-.tab{flex:1;border:1px solid var(--line);background:var(--panel);color:#fff;border-radius:12px;padding:12px 8px;font-weight:700}.tab.active{background:#f0a6c8;color:#241722;border-color:#f0a6c8}
+:root{color-scheme:dark;--bg:#171923;--panel:#222635;--muted:#aeb4c4;--line:#383e50;--pink:#f0a6c8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#f7f7fb;font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+header{padding:calc(15px + env(safe-area-inset-top)) 18px 12px;text-align:center}
+h1{font-size:24px;letter-spacing:2px;margin:0;font-weight:850}
+header p{color:var(--muted);font-size:11px;letter-spacing:2px;margin:6px 0 0}
+main{max-width:900px;margin:auto;padding:0 16px 36px}
+.tabs{display:flex;gap:8px;margin:8px 0 16px}
+.tab{flex:1;border:1px solid var(--line);background:var(--panel);color:#fff;border-radius:12px;padding:12px 8px;font-weight:700}
+.tab.active{background:var(--pink);color:#241722;border-color:var(--pink)}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}
-.spectrum{display:grid;grid-template-columns:1fr 1fr;min-height:210px;border-radius:17px;overflow:hidden;box-shadow:0 12px 30px #0005}
-.half{display:flex;align-items:center;justify-content:center;text-align:center;padding:20px 14px;font-size:clamp(19px,5vw,27px);font-weight:850;line-height:1.12;overflow-wrap:anywhere}.half:first-child{border-right:2px solid #ffffff44}
-.card-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin:12px 2px 0}
-button,input,select,textarea{font:inherit}.primary,.secondary,.danger{border:0;border-radius:13px;padding:14px 16px;font-weight:800;cursor:pointer}.primary{background:#f0a6c8;color:#241722;width:100%;font-size:17px}.secondary{background:#343b4d;color:#fff}.danger{background:#642f3c;color:#fff}.button-row{display:flex;gap:9px;margin-top:12px}.button-row>*{flex:1}
-.muted{text-align:center;color:var(--muted);font-size:13px;line-height:1.5}.hidden{display:none!important}label{display:block;color:#d9dce5;font-size:13px;font-weight:700;margin:12px 0 6px}
-input,select,textarea{width:100%;background:#171b27;border:1px solid var(--line);border-radius:10px;padding:12px;color:#fff}textarea{min-height:72px;resize:vertical}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.toolbar{display:flex;gap:8px;flex-wrap:wrap}.toolbar button{flex:1}
-.stats{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:10px}.item{padding:12px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}
-.item strong{display:block;font-size:14px;line-height:1.4}.item small{color:var(--muted)}.item-actions{display:flex;gap:7px;margin-top:8px}.item-actions button{padding:7px 10px;font-size:12px}.empty{padding:28px;text-align:center;color:var(--muted)}
-footer{text-align:center;color:#7f879a;font-size:11px;padding:18px}@media(min-width:600px){.spectrum{min-height:250px}.half{padding:26px}}
-</style></head><body>
+.spectrum{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:clamp(210px,42vh,440px);border-radius:17px;overflow:hidden;box-shadow:0 12px 30px #0005}
+.half{display:flex;align-items:center;justify-content:center;text-align:center;padding:clamp(14px,3vw,34px);font-size:clamp(20px,3.2vw,38px);font-weight:850;line-height:1.12;overflow-wrap:anywhere;min-width:0}
+.half:first-child{border-right:2px solid #ffffff55}
+.card-meta{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:12px;margin:10px 2px 0}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.primary,.secondary,.danger{border:0;border-radius:13px;padding:13px 16px;font-weight:800}
+.primary{background:var(--pink);color:#241722;width:100%;font-size:17px}
+.secondary{background:#343b4d;color:#fff}
+.danger{background:#642f3c;color:#fff}
+.button-row{display:flex;gap:9px;margin-top:10px}
+.button-row>*{flex:1}
+.muted{text-align:center;color:var(--muted);font-size:13px;line-height:1.5}
+.hidden{display:none!important}
+label{display:block;color:#d9dce5;font-size:13px;font-weight:700;margin:12px 0 6px}
+input,select,textarea{width:100%;background:#171b27;border:1px solid var(--line);border-radius:10px;padding:11px 12px;color:#fff}
+textarea{min-height:86px;resize:vertical}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+.toolbar button{flex:1}
+.stats{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:13px;margin-bottom:10px}
+.item{padding:12px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.item strong{display:block;font-size:14px;line-height:1.4}
+.item small{color:var(--muted)}
+.item-actions{display:flex;gap:7px;margin-top:8px}
+.item-actions button{padding:8px 12px;font-size:12px}
+.empty{padding:24px;text-align:center;color:var(--muted)}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px;margin-top:10px}
+.category-choice{display:flex;align-items:center;gap:8px;background:#171b27;border:1px solid var(--line);border-radius:10px;padding:10px;font-size:14px}
+.category-choice input{width:auto;margin:0;accent-color:var(--pink)}
+.note{font-size:12px;color:var(--muted);margin:8px 0 0;line-height:1.45}
+.status{padding:10px 12px;border-radius:10px;background:#171b27;color:#d9dce5;font-size:13px;line-height:1.5;margin-top:10px;white-space:pre-wrap}
+.edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.edit-grid .wide{grid-column:1/-1}
+footer{text-align:center;color:#7f879a;font-size:11px;padding:16px}
+#focusExitHint{display:none}
+body.focus-mode{overflow:hidden}
+body.focus-mode header,body.focus-mode .tabs,body.focus-mode #playControls,body.focus-mode #manageView,body.focus-mode footer{display:none!important}
+body.focus-mode main{max-width:none;width:100%;height:100dvh;padding:env(safe-area-inset-top) 12px env(safe-area-inset-bottom);display:flex;flex-direction:column;justify-content:space-between;gap:10px}
+body.focus-mode #playView{display:flex;flex:1;min-height:0;flex-direction:column;justify-content:space-between;gap:12px}
+body.focus-mode #playView .panel{display:none}
+body.focus-mode #cardArea{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:0}
+body.focus-mode .spectrum{min-height:0;height:100%;max-height:calc(100dvh - 105px);width:100%}
+body.focus-mode .half{font-size:clamp(22px,4.2vw,52px);padding:clamp(10px,3vw,36px)}
+body.focus-mode .card-meta{display:none}
+body.focus-mode #drawBtn{flex:none;margin:0 auto;width:min(100%,720px);min-height:54px}
+@media(orientation:landscape) and (max-height:600px){
+ header{display:none}
+ main{padding-top:8px}
+ .spectrum{min-height:calc(100dvh - 260px)}
+ .half{font-size:clamp(18px,3vw,30px);padding:12px}
+}
+@media(max-width:560px){
+ .form-grid{grid-template-columns:1fr}
+ .spectrum{min-height:230px}
+ .half{font-size:clamp(19px,5vw,27px);padding:15px 10px}
+ .edit-grid{grid-template-columns:1fr}
+ .edit-grid .wide{grid-column:auto}
+}
+</style>
+</head>
+<body>
 <header><h1>WAVELENGTH</h1><p>AFTER DARK · YOUR CUSTOM EDITION</p></header>
 <main>
 <div class="tabs"><button class="tab active" id="playTab">Play</button><button class="tab" id="manageTab">Manage cards</button></div>
 <section id="playView">
-<div class="panel"><div class="form-grid">
-<div><label for="categoryFilter">Category</label><select id="categoryFilter"><option value="All">All categories</option><option>Sexy</option><option>Filthy</option><option>Unhinged</option></select></div>
-<div><label>Cards remaining</label><div id="remaining" style="padding:12px 2px;font-weight:800">250</div></div></div></div>
-<div style="padding:5px 0 14px"><div class="spectrum"><div class="half" id="leftSide">Tap draw to begin</div><div class="half" id="rightSide">Your next spectrum</div></div>
-<div class="card-meta"><span id="categoryLabel">Ready when you are</span><span id="counter"></span></div></div>
+<div class="panel" id="playControls">
+<strong>Choose your categories</strong>
+<div class="toolbar" style="margin-top:10px"><button class="secondary" id="selectAllBtn" type="button">Select all</button><button class="secondary" id="clearAllBtn" type="button">Clear all</button></div>
+<div class="category-grid" id="categoryChoices"></div>
+<div class="stats" style="margin:12px 0 0"><span id="deckSize">0 cards in this game</span><span id="remaining">0 remaining</span></div>
+<div class="button-row"><button class="secondary" id="reshuffleBtn" type="button">Shuffle new game</button><button class="secondary" id="focusBtn" type="button">Landscape full screen</button></div>
+</div>
+<div id="cardArea">
+<div class="spectrum"><div class="half" id="leftSide">Tap draw to begin</div><div class="half" id="rightSide">Your next spectrum</div></div>
+<div class="card-meta"><span id="categoryLabel">Ready when you are</span><span id="counter"></span></div>
+</div>
 <button class="primary" id="drawBtn">DRAW A CARD</button>
-<div class="button-row"><button class="secondary" id="reshuffleBtn">Reshuffle deck</button><button class="secondary" id="showAllBtn">Browse cards</button></div>
-<p class="muted">No repeats until the selected deck is exhausted. Every draw gets a fresh colour pairing.</p></section>
+</section>
 <section id="manageView" class="hidden">
-<div class="panel"><h2 style="margin:0 0 4px;font-size:19px">Add a spectrum</h2>
-<label for="newCategory">Category</label><select id="newCategory"><option>Sexy</option><option>Filthy</option><option>Unhinged</option></select>
-<div class="form-grid"><div><label for="newLeft">Left side</label><textarea id="newLeft" placeholder="e.g. Lights on"></textarea></div><div><label for="newRight">Right side</label><textarea id="newRight" placeholder="e.g. Lights off"></textarea></div></div>
-<button class="primary" id="addBtn" style="margin-top:12px">ADD CARD</button></div>
-<div class="panel"><div class="stats"><strong id="totalCount">250 cards</strong><span id="filteredCount"></span></div>
-<input class="search" id="searchInput" placeholder="Search cards...">
-<div class="form-grid"><div><label for="manageCategory">Filter category</label><select id="manageCategory"><option value="All">All categories</option><option>Sexy</option><option>Filthy</option><option>Unhinged</option></select></div>
-<div><label for="sortSelect">Sort</label><select id="sortSelect"><option value="category">Category</option><option value="az">A to Z</option><option value="newest">Newest first</option></select></div></div><div id="cardList"></div></div>
-<div class="panel"><h2 style="font-size:17px;margin-top:0">Backup & restore</h2><p class="muted" style="text-align:left">Export a backup before clearing browser data or moving to another phone.</p>
-<div class="toolbar"><button class="secondary" id="exportBtn">Export backup</button><button class="secondary" id="importBtn">Import backup</button><input type="file" id="importFile" accept="application/json,.json" class="hidden"></div></div>
-</section><footer>Made for your game nights · Your cards stay on this device</footer></main>
+<div class="panel">
+<h2 style="margin:0 0 4px;font-size:19px">Add one card</h2>
+<label for="newCategory">Category</label><select id="newCategory"></select>
+<label for="newCategoryName">Or create a new category</label><input id="newCategoryName" placeholder="Optional new category name">
+<div class="form-grid"><div><label for="newLeft">Left side</label><textarea id="newLeft" placeholder="First end of the spectrum"></textarea></div><div><label for="newRight">Right side</label><textarea id="newRight" placeholder="Opposite end of the spectrum"></textarea></div></div>
+<button class="primary" id="addBtn" style="margin-top:12px">ADD CARD</button>
+</div>
+<div class="panel">
+<h2 style="margin:0 0 4px;font-size:19px">Add many cards</h2>
+<p class="note">One card per line. Put ↔ between the two ends. Choose one category for the whole batch. Lines that don't match the format will be reported.</p>
+<label for="bulkCategory">Category for this batch</label><select id="bulkCategory"></select>
+<label for="bulkCategoryName">Or create a new category</label><input id="bulkCategoryName" placeholder="Optional new category name">
+<label for="bulkInput">Paste your cards</label><textarea id="bulkInput" rows="7" placeholder="Barely adventurous ↔ Extremely adventurous&#10;A little awkward ↔ Completely mortifying"></textarea>
+<button class="primary" id="bulkAddBtn" style="margin-top:10px">ADD THESE CARDS</button>
+<div id="bulkStatus" class="status hidden" aria-live="polite"></div>
+</div>
+<div class="panel">
+<div class="stats"><strong id="totalCount">0 cards</strong><span id="filteredCount"></span></div>
+<input id="searchInput" placeholder="Search cards...">
+<div class="form-grid"><div><label for="manageCategory">Filter category</label><select id="manageCategory"></select></div><div><label for="sortSelect">Sort</label><select id="sortSelect"><option value="category">Category</option><option value="az">A to Z</option><option value="newest">Newest first</option></select></div></div>
+<div id="cardList"></div>
+</div>
+<div class="panel">
+<h2 style="font-size:17px;margin-top:0">Backup & restore</h2>
+<p class="note">Export a backup before clearing browser data or moving to another phone. Import replaces the collection in this browser.</p>
+<div class="toolbar" style="margin-top:10px"><button class="secondary" id="exportBtn">Export backup</button><button class="secondary" id="importBtn">Import backup</button><input type="file" id="importFile" accept="application/json,.json" class="hidden"></div>
+</div>
+</section>
+<footer>Made for your game nights · Your cards stay on this device</footer>
+</main>
 <script>
+'use strict';
 const KEY='wavelength-after-dark-v1';
 const colors=[['#D85C83','#347EAA'],['#8D62B5','#D18A42'],['#248B82','#B64F67'],['#D07835','#536DB0'],['#A84D9A','#4D8A65'],['#C14F42','#477CB5'],['#7B69C7','#B17B43'],['#D05E9C','#368E9B'],['#A75B35','#596FB7'],['#4B9274','#B54C76']];
-let cards=[],pile=[],count=0;
-const $=id=>document.getElementById(id);const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+let cards=[],pile=[],count=0,drawnTotal=0;
+const $=id=>document.getElementById(id);
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,9);
 function save(){localStorage.setItem(KEY,JSON.stringify(cards))}
-async function init(){try{let s=localStorage.getItem(KEY);if(s)cards=JSON.parse(s);else{cards=await (await fetch('./cards.json')).json();cards=cards.map(c=>({...c,id:uid()}));save()}}catch(e){alert('Please open the app online once to load the starter cards.')}
- shuffle();render();if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{})}
-function selected(){let f=$('categoryFilter').value;return cards.filter(c=>f==='All'||c.category===f)}
-function shuffle(){pile=selected().map(c=>c.id);for(let i=pile.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[pile[i],pile[j]]=[pile[j],pile[i]]}count=0;$('leftSide').textContent='Ready for a new round';$('rightSide').textContent='Draw your first card';$('categoryLabel').textContent='Freshly shuffled';$('counter').textContent='';remaining()}
-function remaining(){$('remaining').textContent=pile.length+' remaining';$('drawBtn').textContent=pile.length?'DRAW A CARD':'DECK COMPLETE · RESHUFFLE'}
-function draw(){if(!pile.length){$('categoryLabel').textContent='Deck complete';$('leftSide').textContent='You made it through';$('rightSide').textContent='Reshuffle to play again';remaining();return}
-let c=cards.find(x=>x.id===pile.pop());if(!c){draw();return}let p=colors[Math.floor(Math.random()*colors.length)];$('leftSide').textContent=c.left;$('rightSide').textContent=c.right;$('leftSide').style.background=p[0];$('rightSide').style.background=p[1];$('categoryLabel').textContent=c.category;count++;$('counter').textContent='Draw '+count+' of '+selected().length;remaining()}
-function render(){ $('totalCount').textContent=cards.length+' cards';remaining();renderList()}
-function tab(m){$('playView').classList.toggle('hidden',m);$('manageView').classList.toggle('hidden',!m);$('playTab').classList.toggle('active',!m);$('manageTab').classList.toggle('active',m);if(m)renderList()}
-function renderList(){let q=$('searchInput').value.toLowerCase(),f=$('manageCategory').value,s=$('sortSelect').value;let a=cards.filter(c=>(f==='All'||c.category===f)&&(`${c.left} ${c.right} ${c.category}`).toLowerCase().includes(q));if(s==='az')a.sort((x,y)=>x.left.localeCompare(y.left));else if(s==='newest')a.reverse();else a.sort((x,y)=>x.category.localeCompare(y.category));$('filteredCount').textContent=a.length+' shown';let box=$('cardList');box.innerHTML='';if(!a.length){box.innerHTML='<div class="empty">No matching cards.</div>';return}
-a.forEach(c=>{let el=document.createElement('div');el.className='item';let t=document.createElement('strong');t.textContent=c.left+' ↔ '+c.right;let sm=document.createElement('small');sm.textContent=c.category;let acts=document.createElement('div');acts.className='item-actions';let e=document.createElement('button');e.className='secondary';e.textContent='Edit';e.onclick=()=>edit(c.id);let d=document.createElement('button');d.className='danger';d.textContent='Delete';d.onclick=()=>del(c.id);acts.append(e,d);el.append(t,sm,acts);box.append(el)})}
-function add(){let l=$('newLeft').value.trim(),r=$('newRight').value.trim();if(!l||!r){alert('Fill in both sides first.');return}cards.push({id:uid(),category:$('newCategory').value,left:l,right:r});save();$('newLeft').value='';$('newRight').value='';shuffle();render()}
-function edit(id){let c=cards.find(x=>x.id===id);let l=prompt('Edit left side:',c.left);if(l===null)return;let r=prompt('Edit right side:',c.right);if(r===null)return;let cat=prompt('Category: Sexy, Filthy or Unhinged',c.category);if(cat===null)return;if(!l.trim()||!r.trim()||!['Sexy','Filthy','Unhinged'].includes(cat.trim())){alert('Both sides are required. Use Sexy, Filthy or Unhinged.');return}Object.assign(c,{left:l.trim(),right:r.trim(),category:cat.trim()});save();shuffle();render()}
-function del(id){let c=cards.find(x=>x.id===id);if(confirm('Delete this card?\\n\\n'+c.left+' ↔ '+c.right)){cards=cards.filter(x=>x.id!==id);save();shuffle();render()}}
-function exportBackup(){let b=new Blob([JSON.stringify(cards,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='wavelength-after-dark-backup.json';a.click();URL.revokeObjectURL(u)}
-function importBackup(file){let r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(!Array.isArray(d)||!d.every(c=>c.left&&c.right&&['Sexy','Filthy','Unhinged'].includes(c.category)))throw 0;if(!confirm('Replace your collection with '+d.length+' imported cards?'))return;cards=d.map(c=>({id:uid(),category:c.category,left:String(c.left),right:String(c.right)}));save();shuffle();render();alert('Backup imported.')}catch(e){alert('Invalid backup file.')}};r.readAsText(file)}
-$('playTab').onclick=()=>tab(false);$('manageTab').onclick=()=>tab(true);$('drawBtn').onclick=draw;$('reshuffleBtn').onclick=shuffle;$('categoryFilter').onchange=shuffle;$('showAllBtn').onclick=()=>tab(true);$('addBtn').onclick=add;$('searchInput').oninput=renderList;$('manageCategory').onchange=renderList;$('sortSelect').onchange=renderList;$('exportBtn').onclick=exportBackup;$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=e=>{if(e.target.files[0])importBackup(e.target.files[0]);e.target.value=''};
+function normalizeCards(input){
+ const seen=new Set();
+ return input.filter(c=>c&&typeof c.left==='string'&&typeof c.right==='string'&&c.left.trim()&&c.right.trim()).map(c=>{
+  let id=String(c.id||uid());while(seen.has(id))id=uid();seen.add(id);
+  return {...c,id,category:String(c.category||'Uncategorized').trim()||'Uncategorized',left:c.left.trim(),right:c.right.trim()};
+ });
+}
+function categories(){return [...new Set(cards.map(c=>c.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b))}
+function fillSelect(id,includeAll=false){
+ const el=$(id),old=el.value,opts=categories();
+ el.innerHTML='';
+ if(includeAll){const o=document.createElement('option');o.value='All';o.textContent='All categories';el.append(o)}
+ opts.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;el.append(o)});
+ if(old&&(old==='All'&&includeAll||opts.includes(old)))el.value=old;
+}
+function renderCategoryControls(){
+ const wrap=$('categoryChoices'),active=new Set([...wrap.querySelectorAll('input:checked')].map(x=>x.value));
+ wrap.innerHTML='';
+ categories().forEach(cat=>{
+  const label=document.createElement('label');label.className='category-choice';
+  const input=document.createElement('input');input.type='checkbox';input.value=cat;input.checked=active.size?active.has(cat):true;
+  input.addEventListener('change',()=>shuffle());
+  const span=document.createElement('span');span.textContent=cat;
+  label.append(input,span);wrap.append(label);
+ });
+ if(!wrap.children.length)wrap.innerHTML='<div class="empty">Add a card to create your first category.</div>';
+}
+function selectedCategories(){return [...$('categoryChoices').querySelectorAll('input:checked')].map(x=>x.value)}
+function selected(){const chosen=new Set(selectedCategories());return cards.filter(c=>chosen.has(c.category))}
+async function init(){
+ try{
+  const stored=localStorage.getItem(KEY);
+  if(stored!==null){const parsed=JSON.parse(stored);if(!Array.isArray(parsed))throw new Error('Saved card data is not a list');cards=normalizeCards(parsed);save()}
+  else{const response=await fetch('./cards.json');if(!response.ok)throw new Error('Starter cards could not be loaded');cards=normalizeCards(await response.json());save()}
+ }catch(e){console.error(e);$('leftSide').textContent='Could not load cards';$('rightSide').textContent='Open the app online once, then reload';}
+ renderCategoryControls();fillSelect('newCategory');fillSelect('bulkCategory');fillSelect('manageCategory',true);
+ shuffle();render();
+ if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+function shuffle(){
+ const chosen=selected();pile=chosen.map(c=>c.id);
+ for(let i=pile.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pile[i],pile[j]]=[pile[j],pile[i]]}
+ count=0;drawnTotal=chosen.length;
+ $('leftSide').textContent=chosen.length?'Ready for a new round':'Choose at least one category';
+ $('rightSide').textContent=chosen.length?'Draw your first card':'No cards in this deck';
+ $('leftSide').style.background='#343b4d';$('rightSide').style.background='#4b5368';
+ $('categoryLabel').textContent=chosen.length?'Freshly shuffled':'No categories selected';
+ $('counter').textContent='';updateDeckInfo();
+}
+function updateDeckInfo(){
+ $('remaining').textContent=pile.length+' remaining';
+ $('deckSize').textContent=drawnTotal+' cards in this game';
+ $('drawBtn').textContent=pile.length?'DRAW A CARD':'DECK COMPLETE · SHUFFLE AGAIN';
+ $('drawBtn').disabled=pile.length===0;
+}
+function draw(){
+ if(!pile.length){$('categoryLabel').textContent='Deck complete';$('leftSide').textContent='You made it through';$('rightSide').textContent='Shuffle a new game to play again';updateDeckInfo();return}
+ const id=pile.pop();const index=cards.findIndex(c=>c.id===id);
+ if(index<0){shuffle();return}
+ const c=cards[index],pair=colors[Math.floor(Math.random()*colors.length)];
+ $('leftSide').textContent=c.left;$('rightSide').textContent=c.right;
+ $('leftSide').style.background=pair[0];$('rightSide').style.background=pair[1];
+ $('categoryLabel').textContent=c.category;count++;
+ $('counter').textContent='Draw '+count+' of '+drawnTotal;updateDeckInfo();
+}
+function render(){
+ $('totalCount').textContent=cards.length+' cards';
+ fillSelect('newCategory');fillSelect('bulkCategory');fillSelect('manageCategory',true);
+ updateDeckInfo();renderList();
+}
+function tab(manage){
+ $('playView').classList.toggle('hidden',manage);$('manageView').classList.toggle('hidden',!manage);
+ $('playTab').classList.toggle('active',!manage);$('manageTab').classList.toggle('active',manage);
+ if(manage)renderList();
+}
+function renderList(){
+ const q=$('searchInput').value.toLowerCase(),f=$('manageCategory').value,s=$('sortSelect').value;
+ let list=cards.filter(c=>(f==='All'||c.category===f)&&(`${c.left} ${c.right} ${c.category}`).toLowerCase().includes(q));
+ if(s==='az')list.sort((a,b)=>a.left.localeCompare(b.left));
+ else if(s==='newest')list.reverse();
+ else list.sort((a,b)=>a.category.localeCompare(b.category)||a.left.localeCompare(b.left));
+ $('filteredCount').textContent=list.length+' shown';
+ const box=$('cardList');box.innerHTML='';
+ if(!list.length){box.innerHTML='<div class="empty">No matching cards.</div>';return}
+ list.forEach(c=>{
+  const el=document.createElement('div');el.className='item';
+  const title=document.createElement('strong');title.textContent=c.left+' ↔ '+c.right;
+  const meta=document.createElement('small');meta.textContent=c.category;
+  const actions=document.createElement('div');actions.className='item-actions';
+  const editBtn=document.createElement('button');editBtn.className='secondary';editBtn.textContent='Edit';editBtn.onclick=()=>editCard(c.id,el);
+  const delBtn=document.createElement('button');delBtn.className='danger';delBtn.textContent='Delete';delBtn.onclick=()=>deleteCard(c.id);
+  actions.append(editBtn,delBtn);el.append(title,meta,actions);box.append(el);
+ });
+}
+function editCard(id,row){
+ const c=cards.find(x=>x.id===id);if(!c)return;
+ row.innerHTML='';
+ const form=document.createElement('div');form.className='edit-grid';
+ const left=document.createElement('textarea');left.value=c.left;left.setAttribute('aria-label','Left side');
+ const right=document.createElement('textarea');right.value=c.right;right.setAttribute('aria-label','Right side');
+ const category=document.createElement('select');categories().forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;category.append(o)});category.value=c.category;
+ const newCat=document.createElement('input');newCat.placeholder='Or enter a new category';
+ const saveBtn=document.createElement('button');saveBtn.className='primary';saveBtn.textContent='Save changes';
+ const cancelBtn=document.createElement('button');cancelBtn.className='secondary';cancelBtn.textContent='Cancel';
+ const leftWrap=document.createElement('div'),rightWrap=document.createElement('div'),catWrap=document.createElement('div'),newWrap=document.createElement('div');
+ leftWrap.append(left);rightWrap.append(right);catWrap.append(category);newWrap.append(newCat);
+ const actions=document.createElement('div');actions.className='item-actions wide';actions.append(saveBtn,cancelBtn);
+ form.append(leftWrap,rightWrap,catWrap,newWrap,actions);row.append(form);
+ cancelBtn.onclick=renderList;
+ saveBtn.onclick=()=>{
+  const l=left.value.trim(),r=right.value.trim(),cat=(newCat.value.trim()||category.value).trim();
+  if(!l||!r||!cat){alert('Both ends and a category are required.');return}
+  Object.assign(c,{left:l,right:r,category:cat});save();renderCategoryControls();render();shuffle();
+ };
+}
+function deleteCard(id){
+ const c=cards.find(x=>x.id===id);if(!c)return;
+ if(confirm('Delete this card?\n\n'+c.left+' ↔ '+c.right)){
+  cards=cards.filter(x=>x.id!==id);save();renderCategoryControls();render();shuffle();
+ }
+}
+function resolveCategory(selectId,inputId){
+ const typed=$(inputId).value.trim();
+ return typed||$(selectId).value;
+}
+function addOne(){
+ const left=$('newLeft').value.trim(),right=$('newRight').value.trim(),category=resolveCategory('newCategory','newCategoryName');
+ if(!left||!right||!category){alert('Fill in both ends and choose a category.');return}
+ cards.push({id:uid(),category,left,right});save();
+ $('newLeft').value='';$('newRight').value='';$('newCategoryName').value='';
+ renderCategoryControls();render();shuffle();
+}
+function addBulk(){
+ const raw=$('bulkInput').value;
+ const lines=raw.split(/\r?\n/).map((line,i)=>({line:line.trim(),number:i+1})).filter(x=>x.line);
+ const category=resolveCategory('bulkCategory','bulkCategoryName');
+ if(!lines.length){alert('Paste at least one card first.');return}
+ if(!category){alert('Choose a category for this batch.');return}
+ const valid=[],bad=[];
+ lines.forEach(x=>{
+  const parts=x.line.split('↔');
+  if(parts.length!==2||!parts[0].trim()||!parts[1].trim())bad.push(x.number);
+  else valid.push({id:uid(),category,left:parts[0].trim(),right:parts[1].trim()});
+ });
+ if(valid.length){cards.push(...valid);save();renderCategoryControls();render();shuffle();$('bulkInput').value='';$('bulkCategoryName').value=''}
+ const status=$('bulkStatus');status.classList.remove('hidden');
+ status.textContent=valid.length+' card'+(valid.length===1?'':'s')+' added.'+(bad.length?'\nPlease fix these line numbers and try again: '+bad.join(', '):'');
+}
+function exportBackup(){
+ const blob=new Blob([JSON.stringify(cards,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download='wavelength-after-dark-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function importBackup(file){
+ const reader=new FileReader();
+ reader.onload=()=>{
+  try{
+   const data=JSON.parse(reader.result);
+   if(!Array.isArray(data)||!data.every(c=>c&&typeof c.left==='string'&&typeof c.right==='string'&&typeof c.category==='string'))throw new Error('Invalid card list');
+   if(!confirm('Replace your collection with '+data.length+' imported cards?'))return;
+   cards=normalizeCards(data);save();renderCategoryControls();render();shuffle();alert('Backup imported.');
+  }catch(e){alert('Invalid backup file. Check that it is a Wavelength JSON backup.')}
+ };
+ reader.readAsText(file);
+}
+function setFocus(on){
+ document.body.classList.toggle('focus-mode',on);
+ if(on){
+  const el=document.documentElement;
+  if(el.requestFullscreen)el.requestFullscreen().catch(()=>{});
+  if(screen.orientation&&screen.orientation.lock)screen.orientation.lock('landscape').catch(()=>{});
+ }else{
+  if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(()=>{});
+  if(screen.orientation&&screen.orientation.unlock)screen.orientation.unlock();
+ }
+}
+$('playTab').onclick=()=>tab(false);$('manageTab').onclick=()=>tab(true);
+$('drawBtn').onclick=draw;$('reshuffleBtn').onclick=shuffle;
+$('selectAllBtn').onclick=()=>{$('categoryChoices').querySelectorAll('input').forEach(x=>x.checked=true);shuffle()};
+$('clearAllBtn').onclick=()=>{$('categoryChoices').querySelectorAll('input').forEach(x=>x.checked=false);shuffle()};
+$('focusBtn').onclick=()=>setFocus(true);
+$('addBtn').onclick=addOne;$('bulkAddBtn').onclick=addBulk;
+$('searchInput').oninput=renderList;$('manageCategory').onchange=renderList;$('sortSelect').onchange=renderList;
+$('exportBtn').onclick=exportBackup;$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=e=>{if(e.target.files[0])importBackup(e.target.files[0]);e.target.value=''};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('focus-mode'))setFocus(false)});
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement)document.body.classList.remove('focus-mode')});
 init();
-</script></body></html>
+</script>
+</body>
+</html>
