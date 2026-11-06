@@ -60,15 +60,17 @@ textarea{min-height:86px;resize:vertical}
 footer{text-align:center;color:#7f879a;font-size:11px;padding:16px}
 #focusExitHint{display:none}
 body.focus-mode{overflow:hidden}
+#focusExitBtn{display:none}
 body.focus-mode header,body.focus-mode .tabs,body.focus-mode #playControls,body.focus-mode #manageView,body.focus-mode footer{display:none!important}
-body.focus-mode main{max-width:none;width:100%;height:100dvh;padding:env(safe-area-inset-top) 12px env(safe-area-inset-bottom);display:flex;flex-direction:column;justify-content:space-between;gap:10px}
-body.focus-mode #playView{display:flex;flex:1;min-height:0;flex-direction:column;justify-content:space-between;gap:12px}
+body.focus-mode main{position:relative;max-width:none;width:100%;height:100dvh;padding:42px 12px max(10px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px}
+body.focus-mode #focusExitBtn{display:block;position:absolute;z-index:5;top:max(7px,env(safe-area-inset-top));right:12px;width:28px;height:28px;padding:0;border:1px solid #ffffff55;border-radius:50%;background:#222635;color:#fff;font-size:18px;line-height:1;opacity:.8}
+body.focus-mode #playView{display:flex;flex:1;min-height:0;flex-direction:column;gap:10px}
 body.focus-mode #playView .panel{display:none}
-body.focus-mode #cardArea{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:0}
-body.focus-mode .spectrum{min-height:0;height:100%;max-height:calc(100dvh - 105px);width:100%}
+body.focus-mode #cardArea{flex:1;min-height:0;display:flex;flex-direction:column;padding:0}
+body.focus-mode .spectrum{display:grid;flex:1;min-height:0;height:auto;max-height:none;width:100%}
 body.focus-mode .half{font-size:clamp(22px,4.2vw,52px);padding:clamp(10px,3vw,36px)}
 body.focus-mode .card-meta{display:none}
-body.focus-mode #drawBtn{flex:none;margin:0 auto;width:min(100%,720px);min-height:54px}
+body.focus-mode #drawBtn{flex:0 0 auto;margin:0 auto;width:min(100%,720px);min-height:54px}
 @media(orientation:landscape) and (max-height:600px){
  header{display:none}
  main{padding-top:8px}
@@ -87,6 +89,7 @@ body.focus-mode #drawBtn{flex:none;margin:0 auto;width:min(100%,720px);min-heigh
 <body>
 <header><h1>WAVELENGTH</h1><p>AFTER DARK · YOUR CUSTOM EDITION</p></header>
 <main>
+<button id="focusExitBtn" type="button" aria-label="Exit widescreen mode" title="Exit widescreen mode">×</button>
 <div class="tabs"><button class="tab active" id="playTab">Play</button><button class="tab" id="manageTab">Manage cards</button></div>
 <section id="playView">
 <div class="panel" id="playControls">
@@ -321,6 +324,7 @@ $('drawBtn').onclick=draw;$('reshuffleBtn').onclick=shuffle;
 $('selectAllBtn').onclick=()=>{$('categoryChoices').querySelectorAll('input').forEach(x=>x.checked=true);shuffle()};
 $('clearAllBtn').onclick=()=>{$('categoryChoices').querySelectorAll('input').forEach(x=>x.checked=false);shuffle()};
 $('focusBtn').onclick=()=>setFocus(true);
+$('focusExitBtn').onclick=()=>setFocus(false);
 $('addBtn').onclick=addOne;$('bulkAddBtn').onclick=addBulk;
 $('searchInput').oninput=renderList;$('manageCategory').onchange=renderList;$('sortSelect').onchange=renderList;
 $('exportBtn').onclick=exportBackup;$('importBtn').onclick=()=>$('importFile').click();
