@@ -327,6 +327,7 @@ $('exportBtn').onclick=exportBackup;$('importBtn').onclick=()=>$('importFile').c
 $('importFile').onchange=e=>{if(e.target.files[0])importBackup(e.target.files[0]);e.target.value=''};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('focus-mode'))setFocus(false)});
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement)document.body.classList.remove('focus-mode')});
+window.addEventListener('orientationchange',()=>{if(window.matchMedia('(orientation: portrait)').matches&&document.body.classList.contains('focus-mode'))setFocus(false)});
 init();
 </script>
 </body>
